@@ -1,0 +1,100 @@
+name: 馃幀 Football Comedy Auto-Upload
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 鬲卮睾賷賱 賰賱 6 爻丕毓丕鬲
+  workflow_dispatch:  # 鬲卮睾賷賱 賷丿賵賷 毓賳丿 丕賱丨丕噩丞
+
+env:
+  PYTHON_VERSION: '3.11'
+  VIDEO_OUTPUT_DIR: './output'
+  TEMP_DIR: './temp'
+
+jobs:
+  create-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 馃摜 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 馃悕 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 馃摝 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client python-dotenv moviepy Pillow
+
+      - name: 馃搧 Create directories
+        run: |
+          mkdir -p ${{ env.VIDEO_OUTPUT_DIR }} ${{ env.TEMP_DIR }}
+
+      - name: 鈿� Fetch Match Data
+        id: fetch_matches
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          RAPIDAPI_HOST: 'api-football-v1.p.rapidapi.com'
+        run: |
+          echo "馃攳 噩丕乇賷 噩賱亘 亘賷丕賳丕鬲 丕賱賲亘丕乇賷丕鬲..."
+          python scripts/fetch_matches.py
+          echo "match_data=$(cat output/match_data.json)" >> $GITHUB_OUTPUT
+
+      - name: 馃 Generate Comedy Script
+        id: generate_script
+        env:
+          DEEPSEEK_KEY: ${{ secrets.DEEPSEEK_KEY }}
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+          MATCH_DATA: ${{ steps.fetch_matches.outputs.match_data }}
+        run: |
+          echo "鉁嶏笍 噩丕乇賷 鬲賵賱賷丿 丕賱爻賷賳丕乇賷賵 丕賱賰賵賲賷丿賷..."
+          python scripts/generate_script.py
+          echo "script_generated=true" >> $GITHUB_OUTPUT
+
+      - name: 馃帹 Generate Thumbnail
+        if: steps.generate_script.outputs.script_generated == 'true'
+        run: |
+          echo "馃柤锔� 噩丕乇賷 廿賳卮丕亍 丕賱氐賵乇丞 丕賱賲氐睾乇丞..."
+          python scripts/generate_thumbnail.py
+
+      - name: 馃幀 Create Video
+        if: steps.generate_script.outputs.script_generated == 'true'
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          echo "馃帴 噩丕乇賷 廿賳鬲丕噩 丕賱賮賷丿賷賵..."
+          python scripts/create_video.py
+
+      - name: 馃摛 Upload to YouTube
+        if: steps.generate_script.outputs.script_generated == 'true'
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          echo "馃殌 噩丕乇賷 乇賮毓 丕賱賮賷丿賷賵 廿賱賶 賷賵鬲賷賵亘..."
+          python scripts/upload_youtube.py
+
+      - name: 馃搳 Update Statistics
+        if: always()
+        run: |
+          echo "馃搱 鬲丨丿賷孬 丕賱廿丨氐丕卅賷丕鬲..."
+          python scripts/update_stats.py
+
+      - name: 馃棏锔� Cleanup temporary files
+        if: always()
+        run: |
+          rm -rf ${{ env.TEMP_DIR }}/*
+          echo "鉁� 鬲賲 鬲賳馗賷賮 丕賱賲賱賮丕鬲 丕賱賲丐賯鬲丞"
+
+      - name: 馃摙 Send Notification
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/send_notification.py
