@@ -1,0 +1,32 @@
+# Football Comedy AI - Requirements
+# تثبيت: pip install -r requirements.txt
+
+# Google APIs - YouTube Upload
+google-auth==2.27.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.118.0
+
+# HTTP Requests
+requests==2.31.0
+
+# Video Processing
+moviepy==1.0.3
+Pillow==10.2.0
+
+# Data Processing
+python-dotenv==1.0.1
+json5==0.9.14
+
+# Optional - Text to Speech
+# gTTS==2.5.0
+# pyttsx3==2.90
+
+# Optional - Advanced Video
+# opencv-python==4.9.0.80
+# imageio-ffmpeg==0.4.9
+
+# Development
+# pytest==8.0.0
+# black==24.1.0
+# flake8==7.0.0

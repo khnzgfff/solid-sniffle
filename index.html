@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚽ Football Comedy AI - نظام أتمتة المحتوى الرياضي الكوميدي</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #00ff87, #60efff, #00ff87);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 200% center; }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 135, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 135, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #00ff87, #00cc6a);
+            color: #0f0f23;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 135, 0.4);
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.1), rgba(96, 239, 255, 0.1));
+            border: 1px solid rgba(0, 255, 135, 0.2);
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .workflow-step {
+            position: relative;
+            padding-right: 40px;
+        }
+        
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #00ff87, #60efff);
+        }
+        
+        .workflow-step::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: #00ff87;
+            border-radius: 50%;
+            border: 3px solid #0f0f23;
+        }
+        
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        .terminal {
+            background: #1a1a2e;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 65, 108, 0.1));
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.1), rgba(96, 239, 255, 0.1));
+            border: 2px solid #00ff87;
+            border-radius: 12px;
+        }
+        
+        .api-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff87, #60efff);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .video-preview {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a1a3e, #0f0f23);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(0, 255, 135, 0.2);
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0f0f23]/90 backdrop-blur-lg border-b border-white/10">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="text-4xl floating">⚽</div>
+                    <div>
+                        <h1 class="text-xl font-bold gradient-text">Football Comedy AI</h1>
+                        <p class="text-xs text-gray-400">نظام أتمتة المحتوى الرياضي الكوميدي</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#dashboard" class="nav-link text-gray-300 hover:text-white">لوحة التحكم</a>
+                    <a href="#workflow" class="nav-link text-gray-300 hover:text-white">سير العمل</a>
+                    <a href="#apis" class="nav-link text-gray-300 hover:text-white">APIs</a>
+                    <a href="#setup" class="nav-link text-gray-300 hover:text-white">الإعداد</a>
+                    <a href="#security" class="nav-link text-gray-300 hover:text-white">الأمان</a>
+                </div>
+                <button id="connectBtn" class="btn-primary px-6 py-2 rounded-full">
+                    <i class="fas fa-plug ml-2"></i>
+                    ربط الحسابات
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto text-center">
+            <div class="inline-block mb-6 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full">
+                <span class="text-green-400 text-sm">
+                    <i class="fas fa-rocket ml-2"></i>
+                    نظام متكامل لتحقيق ملايين المشاهدات
+                </span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-6">
+                أنشئ محتوى <span class="gradient-text">كوميدي رياضي</span>
+                <br>يغزو يوتيوب
+            </h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
+                نظام أتمتة كامل يستخدم الذكاء الاصطناعي لإنشاء فيديوهات كرة قدم كوميدية Viral 
+                مع نشر تلقائي على يوتيوب عبر GitHub Actions
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="scrollToSection('dashboard')" class="btn-primary px-8 py-4 rounded-full text-lg">
+                    <i class="fas fa-play ml-2"></i>
+                    ابدأ الآن
+                </button>
+                <button onclick="scrollToSection('setup')" class="px-8 py-4 rounded-full text-lg border border-white/20 text-white hover:bg-white/10 transition">
+                    <i class="fas fa-code ml-2"></i>
+                    شاهد الكود
+                </button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto">
+                <div class="stat-card p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-green-400 mb-2">10M+</div>
+                    <div class="text-gray-400 text-sm">مشاهدة مستهدفة</div>
+                </div>
+                <div class="stat-card p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-cyan-400 mb-2">24/7</div>
+                    <div class="text-gray-400 text-sm">أتمتة كاملة</div>
+                </div>
+                <div class="stat-card p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-purple-400 mb-2">4 APIs</div>
+                    <div class="text-gray-400 text-sm">متكاملة</div>
+                </div>
+                <div class="stat-card p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-yellow-400 mb-2">100%</div>
+                    <div class="text-gray-400 text-sm">مجاني التشغيل</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-white text-center mb-12">
+                <i class="fas fa-chart-line ml-3 text-green-400"></i>
+                لوحة التحكم الرئيسية
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Status Card -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">حالة النظام</h3>
+                        <span class="flex items-center gap-2 text-green-400">
+                            <span class="w-3 h-3 bg-green-400 rounded-full pulse-dot"></span>
+                            نشط
+                        </span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">GitHub Actions</span>
+                            <span class="text-green-400"><i class="fas fa-check-circle"></i> متصل</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">YouTube API</span>
+                            <span class="text-green-400"><i class="fas fa-check-circle"></i> متصل</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">DeepSeek AI</span>
+                            <span class="text-green-400"><i class="fas fa-check-circle"></i> متصل</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">API-Football</span>
+                            <span class="text-green-400"><i class="fas fa-check-circle"></i> متصل</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Match Card -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">مباراة اليوم</h3>
+                        <span class="text-xs text-gray-400">مباشر</span>
+                    </div>
+                    <div class="text-center py-4">
+                        <div class="flex justify-center items-center gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🇪🇸</div>
+                                <div class="font-bold text-white">ريال مدريد</div>
+                            </div>
+                            <div class="text-3xl font-bold gradient-text">2 - 1</div>
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🇪🇸</div>
+                                <div class="font-bold text-white">برشلونة</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-400">الدقيقة 78' | الكلاسيكو</div>
+                    </div>
+                    <button class="w-full btn-primary py-3 rounded-lg mt-4">
+                        <i class="fas fa-magic ml-2"></i>
+                        توليد محتوى كوميدي
+                    </button>
+                </div>
+
+                <!-- Video Queue Card -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">قائمة الفيديوهات</h3>
+                        <span class="text-green-400 text-sm">3 قيد الانتظار</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                            <div class="w-10 h-10 bg-red-500/20 rounded flex items-center justify-center text-red-400">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-white text-sm font-medium">كارثة التحكيم في الكلاسيكو!</div>
+                                <div class="text-xs text-gray-400">سيتم النشر خلال 2 ساعة</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-500/20 rounded flex items-center justify-center text-blue-400">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-white text-sm font-medium">أغرب أهداف الجولة</div>
+                                <div class="text-xs text-gray-400">مجدول غداً 10 صباحاً</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                            <div class="w-10 h-10 bg-purple-500/20 rounded flex items-center justify-center text-purple-400">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-white text-sm font-medium">ردود فعل اللاعبين الكوميدية</div>
+                                <div class="text-xs text-gray-400">قيد المعالجة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Card -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">الأداء الأخير</h3>
+                        <span class="text-xs text-green-400">+125% 📈</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">المشاهدات هذا الأسبوع</span>
+                                <span class="text-white">2.4M</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-cyan-400 h-2 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">المشتركين الجدد</span>
+                                <span class="text-white">45.2K</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-purple-400 to-pink-400 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">معدل التفاعل</span>
+                                <span class="text-white">12.8%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-400 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Generation Card -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">توليد بالذكاء الاصطناعي</h3>
+                        <span class="text-xs text-gray-400">DeepSeek + Gemini</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-brain text-purple-400"></i>
+                                <span class="text-white text-sm">سيناريوهات مولدة اليوم</span>
+                            </div>
+                            <div class="text-2xl font-bold text-purple-400">24</div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-file-alt text-blue-400"></i>
+                                <span class="text-white text-sm">نصوص كوميدية</span>
+                            </div>
+                            <div class="text-2xl font-bold text-blue-400">18</div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-tags text-green-400"></i>
+                                <span class="text-white text-sm">عناوين Viral</span>
+                            </div>
+                            <div class="text-2xl font-bold text-green-400">36</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">إجراءات سريعة</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="p-4 bg-gradient-to-br from-red-500/20 to-red-600/10 border border-red-500/30 rounded-xl text-center hover:from-red-500/30 hover:to-red-600/20 transition">
+                            <i class="fab fa-youtube text-2xl text-red-400 mb-2"></i>
+                            <div class="text-white text-sm">رفع فيديو</div>
+                        </button>
+                        <button class="p-4 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-xl text-center hover:from-green-500/30 hover:to-green-600/20 transition">
+                            <i class="fas fa-magic text-2xl text-green-400 mb-2"></i>
+                            <div class="text-white text-sm">توليد محتوى</div>
+                        </button>
+                        <button class="p-4 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-xl text-center hover:from-blue-500/30 hover:to-blue-600/20 transition">
+                            <i class="fas fa-futbol text-2xl text-blue-400 mb-2"></i>
+                            <div class="text-white text-sm">جلب نتائج</div>
+                        </button>
+                        <button class="p-4 bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-xl text-center hover:from-purple-500/30 hover:to-purple-600/20 transition">
+                            <i class="fas fa-cog text-2xl text-purple-400 mb-2"></i>
+                            <div class="text-white text-sm">الإعدادات</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow" class="py-20 px-4 bg-white/5">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                <i class="fas fa-project-diagram ml-3 text-cyan-400"></i>
+                سير العمل الآلي
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                نظام متكامل من 6 مراحل يتم تلقائياً عبر GitHub Actions
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="workflow-step p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">1️⃣ جلب بيانات المباريات</h3>
+                    <p class="text-gray-400 mb-3">API-Football يجلب نتائج المباريات والأحداث المهمة (أهداف، بطاقات، لحظات مثيرة)</p>
+                    <div class="code-block p-4">
+                        <code class="text-green-400 text-sm">
+                            GET https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all
+                        </code>
+                    </div>
+                </div>
+                
+                <div class="workflow-step p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">2️⃣ تحليل الأحداث بالذكاء الاصطناعي</h3>
+                    <p class="text-gray-400 mb-3">DeepSeek يحلل الأحداث ويحدد اللحظات الكوميدية المحتملة</p>
+                    <div class="code-block p-4">
+                        <code class="text-purple-400 text-sm">
+                            AI Analysis: "الحكم أعطى 5 بطاقات صفراء في 10 دقائق - فرصة كوميدية!"
+                        </code>
+                    </div>
+                </div>
+                
+                <div class="workflow-step p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">3️⃣ توليد السيناريو الكوميدي</h3>
+                    <p class="text-gray-400 mb-3">DeepSeek + Gemini ينشئان نص كوميدي جذاب مع نكات ومواقف مضحكة</p>
+                    <div class="code-block p-4">
+                        <code class="text-blue-400 text-sm">
+                            "يا ساتر! الحكم دا ماشي حاله حاله... كل لمسه بطاقه!"
+                        </code>
+                    </div>
+                </div>
+                
+                <div class="workflow-step p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">4️⃣ إنشاء العنوان والوصف Viral</h3>
+                    <p class="text-gray-400 mb-3">توليد عناوين جذابة ووصف محسن لـ SEO مع Tags مناسبة</p>
+                    <div class="code-block p-4">
+                        <code class="text-yellow-400 text-sm">
+                            Title: "كارثة تحكيمية في الكلاسيكو! الحكم نسي ينزل الملعب 😂"
+                        </code>
+                    </div>
+                </div>
+                
+                <div class="workflow-step p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">5️⃣ إنتاج الفيديو</h3>
+                    <p class="text-gray-400 mb-3">دمج اللقطات مع التعليق الصوتي والمؤثرات الكوميدية</p>
+                    <div class="code-block p-4">
+                        <code class="text-pink-400 text-sm">
+                            ffmpeg -i footage.mp4 -i audio.mp3 -vf "overlay=logo.png" output.mp4
+                        </code>
+                    </div>
+                </div>
+                
+                <div class="workflow-step p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">6️⃣ النشر على يوتيوب</h3>
+                    <p class="text-gray-400 mb-3">YouTube API يرفع الفيديو تلقائياً مع كل البيانات المحسنة</p>
+                    <div class="code-block p-4">
+                        <code class="text-green-400 text-sm">
+                            youtube.videos().insert(body=video, media_body=media).execute()
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APIs Section -->
+    <section id="apis" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                <i class="fas fa-plug ml-3 text-purple-400"></i>
+                APIs المستخدمة
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                4 APIs قوية تعمل معاً لإنشاء محتوى احترافي
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <!-- YouTube API -->
+                <div class="api-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center">
+                            <i class="fab fa-youtube text-3xl text-red-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">YouTube Data API v3</h3>
+                            <p class="text-gray-400 text-sm">Google Cloud</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        رفع الفيديوهات تلقائياً مع العناوين، الأوصاف،.tags، والصور المصغرة
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>رفع الفيديوهات</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>إدارة القنوات</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>تحليل الإحصائيات</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DeepSeek API -->
+                <div class="api-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-brain text-3xl text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">DeepSeek API</h3>
+                            <p class="text-gray-400 text-sm">AI Model</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        توليد السيناريوهات الكوميدية والنصوص الإبداعية باللهجة المصرية
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>كتابة سيناريوهات</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>توليد نكات كوميدية</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>تحليل المشاعر</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gemini API -->
+                <div class="api-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-sparkles text-3xl text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Gemini API</h3>
+                            <p class="text-gray-400 text-sm">Google AI Studio</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تحليل الصور والفيديوهات وتوليد محتوى بصري إبداعي
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>تحليل بصري</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>توليد أوصاف</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>تحسين SEO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API-Football -->
+                <div class="api-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-futbol text-3xl text-green-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">API-Football</h3>
+                            <p class="text-gray-400 text-sm">RapidAPI</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        جلب بيانات المباريات الحية والنتائج والإحصائيات
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>نتائج مباشرة</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>إحصائيات اللاعبين</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fas fa-check"></i>
+                            <span>أحداث المباراة</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup" class="py-20 px-4 bg-white/5">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                <i class="fas fa-code ml-3 text-green-400"></i>
+                إعداد المشروع
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                خطوات بسيطة لبدء التشغيل خلال 10 دقائق
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Step 1 -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl">1</div>
+                        <h3 class="text-2xl font-bold text-white">أنشئ Repository على GitHub</h3>
+                    </div>
+                    <div class="mr-16 bg-[#0d1117] rounded-xl overflow-hidden">
+                        <div class="flex items-center gap-2 px-4 py-2 bg-[#161b22] border-b border-[#30363d]">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-gray-400 text-sm mr-4">Terminal</span>
+                        </div>
+                        <div class="p-4 terminal text-sm">
+                            <div class="text-gray-400 mb-2"># إنشاء مجلد المشروع</div>
+                            <div class="text-green-400 mb-4">mkdir football-comedy-ai && cd football-comedy-ai</div>
+                            
+                            <div class="text-gray-400 mb-2"># تهيئة Git repository</div>
+                            <div class="text-green-400 mb-4">git init</div>
+                            
+                            <div class="text-gray-400 mb-2"># إنشاء هيكل الملفات</div>
+                            <div class="text-green-400">mkdir -p .github/workflows scripts videos output</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl">2</div>
+                        <h3 class="text-2xl font-bold text-white">أضف GitHub Actions Workflow</h3>
+                    </div>
+                    <div class="mr-16 bg-[#0d1117] rounded-xl overflow-hidden">
+                        <div class="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-[#30363d]">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <span class="text-gray-400 text-sm mr-4">.github/workflows/main.yml</span>
+                            </div>
+                            <button class="text-xs text-green-400 hover:text-green-300" onclick="copyCode('workflow-code')">
+                                <i class="fas fa-copy ml-1"></i>نسخ
+                            </button>
+                        </div>
+                        <div class="p-4 overflow-x-auto">
+                            <pre id="workflow-code" class="text-sm text-gray-300"><code>name: 🎬 Football Comedy Auto-Upload
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # كل 6 ساعات
+  workflow_dispatch:  # تشغيل يدوي
+
+jobs:
+  create-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+      
+      - name: Fetch Match Data
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: python scripts/fetch_matches.py
+      
+      - name: Generate Comedy Script
+        env:
+          DEEPSEEK_KEY: ${{ secrets.DEEPSEEK_KEY }}
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+        run: python scripts/generate_script.py
+      
+      - name: Upload to YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+        run: python scripts/upload_youtube.py</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">3</div>
+                        <h3 class="text-2xl font-bold text-white">إعداد GitHub Secrets</h3>
+                    </div>
+                    <div class="mr-16 warning-box p-6">
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-exclamation-triangle text-yellow-400 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold mb-2">⚠️ تحذير أمني مهم!</h4>
+                                <p class="text-gray-300 text-sm mb-3">
+                                    لا تضع مفاتيح API مباشرة في الكود! استخدم GitHub Secrets لحمايتها.
+                                </p>
+                                <div class="bg-[#0d1117] rounded-lg p-4 text-sm">
+                                    <div class="text-gray-400 mb-2"># اذهب إلى: Settings → Secrets and variables → Actions</div>
+                                    <div class="text-green-400">أضف المفاتيح التالية:</div>
+                                    <div class="text-blue-400 mt-2 space-y-1">
+                                        <div>• YOUTUBE_CLIENT_ID</div>
+                                        <div>• YOUTUBE_CLIENT_SECRET</div>
+                                        <div>• DEEPSEEK_KEY</div>
+                                        <div>• GEMINI_KEY</div>
+                                        <div>• API_FOOTBALL_KEY</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-xl">4</div>
+                        <h3 class="text-2xl font-bold text-white">أنشئ سكريبتات Python</h3>
+                    </div>
+                    <div class="mr-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-[#0d1117] rounded-xl p-4 border border-[#30363d]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fab fa-python text-yellow-400"></i>
+                                <span class="text-white text-sm font-medium">fetch_matches.py</span>
+                            </div>
+                            <p class="text-gray-400 text-xs">جلب بيانات المباريات من API-Football</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-xl p-4 border border-[#30363d]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fab fa-python text-yellow-400"></i>
+                                <span class="text-white text-sm font-medium">generate_script.py</span>
+                            </div>
+                            <p class="text-gray-400 text-xs">توليد السيناريو الكوميدي بالذكاء الاصطناعي</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-xl p-4 border border-[#30363d]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fab fa-python text-yellow-400"></i>
+                                <span class="text-white text-sm font-medium">upload_youtube.py</span>
+                            </div>
+                            <p class="text-gray-400 text-xs">رفع الفيديو إلى يوتيوب</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl">5</div>
+                        <h3 class="text-2xl font-bold text-white">شغّل وراقب!</h3>
+                    </div>
+                    <div class="mr-16 success-box p-6">
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-check-circle text-green-400 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold mb-2">✅ جاهز للتشغيل!</h4>
+                                <p class="text-gray-300 text-sm mb-3">
+                                    ارفع الكود إلى GitHub وسيقوم النظام بالعمل تلقائياً!
+                                </p>
+                                <div class="flex gap-3">
+                                    <button class="btn-primary px-6 py-2 rounded-lg text-sm">
+                                        <i class="fas fa-play ml-2"></i>
+                                        تشغيل يدوي
+                                    </button>
+                                    <button class="px-6 py-2 rounded-lg text-sm border border-white/20 text-white hover:bg-white/10 transition">
+                                        <i class="fas fa-chart-line ml-2"></i>
+                                        عرض السجلات
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-white text-center mb-4">
+                <i class="fas fa-shield-alt ml-3 text-yellow-400"></i>
+                الأمان والحماية
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                حماية مفاتيح API والبيانات الحساسة أولوية قصوى
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="warning-box p-8 mb-8">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-lock text-red-400 text-3xl mt-1"></i>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-4">🚨 تنبيه أمني عاجل!</h3>
+                            <p class="text-gray-300 mb-4">
+                                المفاتيح التي شاركتها في رسالتك <strong class="text-red-400">مكشوفة الآن للعامة</strong>! 
+                                يجب عليك اتخاذ الإجراءات التالية فوراً:
+                            </p>
+                            <div class="bg-[#0d1117] rounded-lg p-6 space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-red-400 font-bold">1.</span>
+                                    <span class="text-gray-300">أعد إنشاء جميع مفاتيح API من لوحات التحكم</span>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-red-400 font-bold">2.</span>
+                                    <span class="text-gray-300">احذف المفاتيح القديمة المعرّضة</span>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-red-400 font-bold">3.</span>
+                                    <span class="text-gray-300">استخدم GitHub Secrets لتخزين المفاتيح الجديدة</span>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-red-400 font-bold">4.</span>
+                                    <span class="text-gray-300">لا تشارك المفاتيح أبداً في الكود أو المحادثات</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">
+                            <i class="fas fa-check-circle text-green-400 ml-2"></i>
+                            الممارسات الآمنة
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-green-400 mt-1"></i>
+                                <span>استخدام GitHub Secrets لجميع المفاتيح</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-green-400 mt-1"></i>
+                                <span>تفعيل المصادقة الثنائية 2FA</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-green-400 mt-1"></i>
+                                <span>تحديث المفاتيح دورياً كل 90 يوم</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-green-400 mt-1"></i>
+                                <span>مراجعة صلاحيات OAuth بانتظام</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-green-400 mt-1"></i>
+                                <span>استخدام نطاقات Redirect محددة</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">
+                            <i class="fas fa-times-circle text-red-400 ml-2"></i>
+                            ما يجب تجنبه
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-times text-red-400 mt-1"></i>
+                                <span>وضع المفاتيح في الكود المباشر</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-times text-red-400 mt-1"></i>
+                                <span>مشاركة المفاتيح في المحادثات</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-times text-red-400 mt-1"></i>
+                                <span>استخدام نفس المفتاح في مشاريع متعددة</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-times text-red-400 mt-1"></i>
+                                <span>ترك Redirect URI مفتوح (*)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-times text-red-400 mt-1"></i>
+                                <span>إهمال مراجعة سجلات الوصول</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-white/10">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="text-3xl">⚽</div>
+                    <div>
+                        <h3 class="text-white font-bold">Football Comedy AI</h3>
+                        <p class="text-gray-400 text-sm">نظام أتمتة المحتوى الرياضي الكوميدي</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    © 2026 Football Comedy AI. جميع الحقوق محفوظة.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll function
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Copy code function
+        function copyCode(elementId) {
+            const code = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                showNotification('تم نسخ الكود بنجاح!', 'success');
+            });
+        }
+
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 left-4 px-6 py-3 rounded-lg shadow-lg z-50 ${
+                type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+            } text-white`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Connect button handler
+        document.getElementById('connectBtn').addEventListener('click', function() {
+            showNotification('جاري الاتصال بالحسابات...', 'info');
+            setTimeout(() => {
+                showNotification('تم الاتصال بنجاح!', 'success');
+            }, 2000);
+        });
+
+        // Animate stats on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-pulse');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Console welcome message
+        console.log('%c⚽ Football Comedy AI', 'font-size: 24px; font-weight: bold; color: #00ff87;');
+        console.log('%cنظام أتمتة المحتوى الرياضي الكوميدي', 'font-size: 14px; color: #60efff;');
+        console.log('%c⚠️ تحذير: لا تشارك مفاتيح API أبداً!', 'font-size: 12px; color: #ff6b6b;');
+        console.log('%c📁 راجع README.md للتعليمات الكاملة', 'font-size: 12px; color: #60efff;');
+
+        // Load and display real-time stats
+        async function loadStats() {
+            try {
+                // In production, this would fetch from a backend
+                const mockStats = {
+                    videosUploaded: 24,
+                    totalViews: 2400000,
+                    subscribers: 48000,
+                    lastUpload: new Date().toISOString()
+                };
+                
+                // Update UI with stats
+                console.log('📊 Stats loaded:', mockStats);
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            console.log('✅ Dashboard initialized');
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                scrollToSection('dashboard');
+            }
+        });
+    </script>
+</body>
+</html>
